@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import Circle from "./Circle";
+import Circle2 from "./Circle2";
+import Header from "./Header";
+import Input from "./Input";
+import { useState } from "react";
+
 
 function App() {
+
+  const [colorValue, setColorValue] = useState('');
+  const [colorRandomValue, setColorRandomValue] = useState('');
+  const [hexValue, setHexValue] = useState('');
+
+
+  const generateRandomColor = () => {
+    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`; //24-bit hexadecimal color code
+    setColorRandomValue(randomColor);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Circle
+        colorRandomValue={colorRandomValue}
+        setColorRandomValue={setColorRandomValue}
+        generateRandomColor={generateRandomColor}
+      />
+      <Circle2
+        colorValue={colorValue}
+        setColorValue={setColorValue}
+        colorRandomValue={colorRandomValue}
+        generateRandomColor={generateRandomColor}
+        hexValue={hexValue}
+
+      />
+      <Input
+        colorValue={colorValue}
+        setColorValue={setColorValue}
+        setHexValue={setHexValue}
+      />
+      <footer> {"@tanggoma"}</footer>
     </div>
   );
 }
